@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>F1 WDC Contenders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>F1 WDC Contenders</h1>
+    <p class="subtitle">
+        Drivers still in mathematical contention for this season's F1 World Drivers' Championship.
+    </p>
+
+    <div class="contenders-wrapper">
+        {% if contenders and contenders|length > 0 %}
+            <div class="contender-list">
+                {% for driver in contenders %}
+                    <article class="contender-card {% if driver.is_contender == 'Yes' %}contender-card--active{% else %}contender-card--out{% endif %}">
+                        <div class="contender-status-overlay">
+                            {% if driver.is_contender == 'Yes' %}
+                                IN FIGHT
+                            {% else %}
+                                OUT
+                            {% endif %}
+                        </div>
+                        <div class="contender-main">
+                            <span class="contender-pos">#{{ driver.position }}</span>
+                            <div class="contender-nameblock">
+                                <span class="contender-code">{{ driver.code }}</span>
+                                <span class="contender-fullname">{{ driver.full_name }}</span>
+                            </div>
+                        </div>
+                        <div class="contender-meta">
+                            <span>{{ driver.points }} of {{ driver.max_points }} pts</span>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No standings data available right now. Try again later.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

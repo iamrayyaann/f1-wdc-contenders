@@ -1,0 +1,214 @@
+/* Dark F1‑flavoured theme */
+
+/* F1 Fonts */
+@font-face {
+    font-family: 'F1 Torque';
+    src: url('fonts/F1%20Torque.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'F1 Turbo';
+    src: url('fonts/F1%20Turbo.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'F1 Regular';
+    src: url('fonts/F1%20Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --bg: #0f0f0f;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --muted: #999999;
+    --accent-red: #ef233c;
+}
+
+body {
+    font-family: 'F1 Torque', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 1.25rem 1rem;
+    background: var(--bg);
+    color: var(--text);
+}
+
+h1 {
+    font-family: 'F1 Turbo', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-align: center;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.35rem;
+}
+
+.subtitle {
+    font-family: 'F1 Regular', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-align: center;
+    margin-bottom: 1.1rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+.contenders-wrapper {
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+.contender-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.contender-card {
+    background: var(--card);
+    border-radius: 6px;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.2s ease;
+}
+
+/* subtle highlight for active contenders */
+.contender-card--active {
+    background: #152015;
+    border-color: #2a4a2a;
+    box-shadow: 0 2px 6px rgba(34, 197, 94, 0.15);
+}
+
+.contender-card--out {
+    background: #201515;
+    border-color: #4a2a2a;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.12);
+}
+
+.contender-status-overlay {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'F1 Turbo', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-weight: 900;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    line-height: 1;
+    white-space: nowrap;
+    color: rgba(229, 229, 229, 0.08);
+    /* fade the label toward the corners while keeping it visible */
+    -webkit-mask-image: radial-gradient(ellipse 140% 120% at 50% 50%, black 0%, black 40%, rgba(0,0,0,0.7) 65%, transparent 100%);
+    mask-image: radial-gradient(ellipse 140% 120% at 50% 50%, black 0%, black 40%, rgba(0,0,0,0.7) 65%, transparent 100%);
+    z-index: 0;
+}
+
+.contender-card--active .contender-status-overlay {
+    color: rgba(34, 197, 94, 0.1);
+}
+
+.contender-card--out .contender-status-overlay {
+    color: rgba(248, 113, 113, 0.1);
+}
+
+.contender-main {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1; /* keep main info above the big label */
+}
+
+.contender-pos {
+    font-size: 0.8rem;
+    color: var(--muted);
+    min-width: 2.2rem;
+}
+
+.contender-code {
+    font-family: 'F1 Torque', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.contender-nameblock {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.contender-fullname {
+    font-family: 'F1 Regular', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 0.72rem;
+    color: var(--muted);
+}
+
+.contender-meta {
+    font-family: 'F1 Regular', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+}
+
+.contender-meta span {
+    white-space: nowrap;
+}
+
+/* Responsiveness */
+
+@media (min-width: 720px) {
+    body {
+        padding: 1.75rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .contender-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .contender-main {
+        flex: 1;
+        justify-content: flex-start;
+    }
+
+    .contender-meta {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-inline: 0.75rem;
+    }
+
+    .contender-meta {
+        font-size: 0.7rem;
+    }
+}
+
