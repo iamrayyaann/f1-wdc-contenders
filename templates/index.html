@@ -13,7 +13,9 @@
     </p>
 
     <div class="contenders-wrapper">
-        {% if contenders and contenders|length > 0 %}
+        {% if error %}
+            <p style="text-align: center; color: var(--muted); padding: 2rem;">{{ error }}</p>
+        {% elif contenders and contenders|length > 0 %}
             <div class="contender-list">
                 {% for driver in contenders %}
                     <article class="contender-card {% if driver.is_contender == 'Yes' %}contender-card--active{% else %}contender-card--out{% endif %}">
@@ -38,7 +40,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p>No standings data available right now. Try again later.</p>
+            <p style="text-align: center; color: var(--muted); padding: 2rem;">No standings data available right now. Try again later.</p>
         {% endif %}
     </div>
 </body>

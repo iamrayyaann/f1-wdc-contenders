@@ -1,5 +1,2 @@
-fastf1
 flask
-gunicorn
 requests
-pandas
